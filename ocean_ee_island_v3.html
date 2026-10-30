@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>海大電機・學程探索島 · 微縮校園</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;800;900&display=swap');
+:root{
+  --bg:#f3f8f7;
+  --sea1:#d8f1ff;
+  --sea2:#bde6f8;
+  --sea3:#88cddd;
+  --ink:#143544;
+  --muted:#5b7680;
+  --deep:#0f2835;
+  --line:rgba(18,63,73,.12);
+  --card:rgba(255,255,255,.88);
+  --card-2:#f9fffd;
+  --accent:#1187a1;
+  --accent2:#1db890;
+  --sand:#f8edc9;
+  --gold:#f2b95e;
+  --shadow:0 24px 70px rgba(18,63,73,.12);
+  --liver-cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='34' viewBox='0 0 40 34'%3E%3Cpath d='M3 16c0-6.8 6.3-12 16.5-12 4.7 0 8 .8 10.3 2.1C33.1 8 36.8 11 37.6 15.8c.7 4.2-1 8.2-4.5 10.6-2.4 1.6-5.2 2.4-8.5 2.3-3.6-.1-6.3-.8-8.8 1.4-1.6 1.4-3.3 2.1-5.6 2.1C5.1 32.2 3 23.8 3 16Z' fill='%23cb5057' stroke='%23743238' stroke-width='2'/%3E%3Cpath d='M14.6 9.2c3.5-1 7.7-.8 11.2.5' stroke='%23f7b7b0' stroke-width='2' stroke-linecap='round'/%3E%3Ccircle cx='11.2' cy='15.3' r='1.5' fill='%23743238'/%3E%3C/svg%3E") 5 5, auto;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:'Noto Sans TC',system-ui,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(circle at 20% 8%, rgba(255,255,255,.95), transparent 22%),
+    linear-gradient(180deg, #eaf8fd 0%, #e7f4f1 42%, #f7faf8 100%);
+  cursor:var(--liver-cursor);
+}
+a,button,input,label,.node,.landmark,.dock-btn,.chip,.panel-card{cursor:var(--liver-cursor)}
+button,input{font:inherit}
+button{border:none;background:none}
+img{max-width:100%}
+.visually-hidden{position:absolute;left:-9999px}
+.hero{position:relative;overflow:hidden;min-height:100vh;padding-bottom:36px}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(1px);opacity:.45;pointer-events:none}
+.hero:before{width:520px;height:520px;left:-180px;top:-180px;background:radial-gradient(circle,#fff 0%, rgba(255,255,255,.1) 65%, transparent 72%)}
+.hero:after{width:420px;height:420px;right:-120px;top:120px;background:radial-gradient(circle,#c0f1ff 0%, rgba(172,229,255,.1) 68%, transparent 76%)}
+.clouds span{position:absolute;display:block;background:rgba(255,255,255,.68);border-radius:999px;filter:blur(.3px);box-shadow:0 12px 22px rgba(255,255,255,.2);animation:floatCloud 12s ease-in-out infinite}
+.clouds span:before,.clouds span:after{content:"";position:absolute;background:inherit;border-radius:inherit}
+.clouds span:before{width:46%;height:120%;left:10%;top:-45%}
+.clouds span:after{width:35%;height:90%;right:15%;top:-30%}
+.clouds .c1{width:135px;height:36px;left:6%;top:18%;animation-delay:-1s}
+.clouds .c2{width:170px;height:42px;left:72%;top:12%;animation-delay:-6s}
+.clouds .c3{width:120px;height:32px;left:84%;top:27%;animation-delay:-3s}
+@keyframes floatCloud{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(10px) translateX(8px)}}
+.topbar{position:relative;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:16px;padding:24px clamp(18px,4vw,72px)}
+.brand{display:flex;align-items:center;gap:14px;font-size:13px;font-weight:900;letter-spacing:.08em}
+.brand-badge{width:48px;height:48px;display:grid;place-items:center;border-radius:16px;background:linear-gradient(135deg,#16485c,#143242);color:#fff;box-shadow:0 10px 28px rgba(20,70,86,.22);font-size:24px}
+.top-actions{display:flex;gap:10px;flex-wrap:wrap}
+.pill{
+  border:1px solid rgba(16,59,70,.1);
+  padding:11px 16px;
+  border-radius:999px;
+  background:rgba(255,255,255,.72);
+  color:var(--deep);
+  backdrop-filter:blur(14px);
+  box-shadow:0 8px 24px rgba(26,68,77,.08);
+  font-weight:800;
+}
+.pill:hover{transform:translateY(-2px);background:#fff}
+.hero-copy{position:relative;z-index:2;max-width:980px;margin:18px auto 0;padding:0 20px;text-align:center}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;padding:9px 14px;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid rgba(16,59,70,.08);font-weight:900;font-size:12px;letter-spacing:.14em;color:#23697b;box-shadow:0 10px 18px rgba(16,59,70,.06)}
+.hero-copy h1{margin:18px 0 14px;font-size:clamp(42px,6vw,78px);line-height:1.08;letter-spacing:.04em;color:#13384a}
+.hero-copy p{max-width:760px;margin:0 auto;color:#58767d;line-height:1.95;font-size:clamp(14px,1.4vw,18px);font-weight:600}
+.hero-cta{margin-top:24px;display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn-main,.btn-sub{padding:14px 22px;border-radius:999px;font-weight:900;box-shadow:0 16px 28px rgba(21,73,81,.12);transition:.24s}
+.btn-main{background:linear-gradient(135deg,#175168,#1aa390);color:white}
+.btn-sub{background:rgba(255,255,255,.84);border:1px solid rgba(21,73,81,.1);color:#184252}
+.btn-main:hover,.btn-sub:hover{transform:translateY(-3px) scale(1.01)}
+.stat-strip{margin:28px auto 0;max-width:1060px;padding:0 20px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.stat-card{background:rgba(255,255,255,.72);backdrop-filter:blur(12px);border:1px solid rgba(19,58,68,.08);padding:18px;border-radius:22px;box-shadow:0 16px 30px rgba(19,58,68,.07)}
+.stat-card b{display:block;font-size:28px;color:#163d50}.stat-card span{font-size:13px;color:#5d7b82;line-height:1.7}
+.island-shell{position:relative;z-index:2;max-width:1320px;margin:36px auto 0;padding:0 16px}
+.island-stage{
+  position:relative;
+  min-height:720px;
+  border-radius:40px;
+  background:linear-gradient(180deg,var(--sea1) 0%, var(--sea2) 44%, #b5e1ef 100%);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,.6);
+}
+.island-stage:before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.65) 1px, transparent 1px);background-size:22px 22px;opacity:.35;pointer-events:none}
+.wave-rings span{position:absolute;inset:auto;display:block;border:2px solid rgba(255,255,255,.45);border-radius:999px;animation:ripple 7s linear infinite}
+.wave-rings .w1{left:6%;top:66%;width:220px;height:110px}
+.wave-rings .w2{right:8%;top:28%;width:260px;height:128px;animation-delay:-2.6s}
+.wave-rings .w3{left:58%;bottom:4%;width:300px;height:140px;animation-delay:-4.3s}
+@keyframes ripple{0%{transform:scale(.82);opacity:.72}100%{transform:scale(1.18);opacity:0}}
+.island-map{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:56px}
+.main-island{position:relative;width:min(1040px,100%);height:610px}
+.island-core{position:absolute;inset:40px 72px 38px;border-radius:45% 55% 44% 56% / 39% 47% 53% 61%;background:
+  radial-gradient(circle at 28% 24%, #fff4ce 0%, #f7e8bd 15%, transparent 15.3%),
+  radial-gradient(circle at 78% 32%, rgba(255,255,255,.26), transparent 12%),
+  linear-gradient(180deg,#8ed78b 0%,#73cb87 32%,#56b57f 71%,#4ba974 100%);
+  box-shadow:
+    inset 0 -18px 0 rgba(54,127,76,.12),
+    0 34px 50px rgba(20,81,65,.15);
+  border:12px solid #f7eac0;
+}
+.pathway,.district-ring{position:absolute;border-radius:999px}
+.pathway{background:#f1ddb4;box-shadow:inset 0 -4px 0 rgba(181,141,77,.16)}
+.path1{left:46%;top:16%;width:34px;height:450px;transform:rotate(-2deg)}
+.path2{left:18%;top:43%;width:640px;height:32px;transform:rotate(5deg)}
+.path3{left:22%;top:22%;width:420px;height:26px;transform:rotate(29deg)}
+.path4{left:43%;top:45%;width:310px;height:24px;transform:rotate(-26deg)}
+.lagoon{position:absolute;border-radius:50%;background:radial-gradient(circle at 40% 35%, #eafaff 0%, #93e8ff 55%, #6fc3dc 100%);border:8px solid #f6ecc6;box-shadow:inset 0 -8px 12px rgba(24,97,115,.12)}
+.lagoon.one{left:16%;top:16%;width:145px;height:112px;transform:rotate(-6deg)}
+.lagoon.two{right:18%;bottom:16%;width:132px;height:104px;transform:rotate(10deg)}
+.trees span,.rocks span{position:absolute;display:block}
+.trees span{width:26px;height:44px;border-radius:14px 14px 50% 50%;background:linear-gradient(180deg,#2a8f6e,#1f6d57);box-shadow:0 8px 0 rgba(0,0,0,.05)}
+.trees span:after{content:"";position:absolute;left:11px;bottom:-10px;width:4px;height:12px;background:#7f5a33;border-radius:3px}
+.t1{left:23%;top:54%}.t2{left:72%;top:18%}.t3{left:69%;top:66%}.t4{left:38%;top:18%}.t5{left:18%;top:31%}
+.rocks span{width:24px;height:14px;border-radius:12px;background:#e4ecee;box-shadow:0 3px 0 rgba(68,104,118,.13)}
+.r1{right:23%;top:20%}.r2{left:31%;bottom:13%}.r3{left:60%;bottom:24%}
+.district{position:absolute;transform:translate(-50%,-50%);z-index:2;display:flex;flex-direction:column;align-items:center;gap:10px}
+.zone-card{
+  min-width:170px;
+  max-width:200px;
+  padding:14px 16px;
+  border-radius:18px;
+  background:rgba(255,255,255,.86);
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(16,59,70,.1);
+  box-shadow:0 16px 26px rgba(17,61,71,.14);
+  text-align:center;
+}
+.zone-card b{display:block;font-size:18px;color:#173c4d}.zone-card small{display:block;margin-top:5px;font-size:12px;line-height:1.6;color:#647d85}
+.character{
+  width:72px;height:86px;position:relative;filter:drop-shadow(0 8px 6px rgba(27,67,77,.2));
+}
+.head{position:absolute;left:17px;top:0;width:40px;height:40px;background:#f5be95;border:3px solid #25485a;border-radius:48% 48% 44% 44%;z-index:2}
+.hair{position:absolute;left:16px;top:-1px;width:42px;height:20px;background:#203845;border-radius:55% 55% 20% 20%;z-index:3}
+.eye{position:absolute;top:21px;width:5px;height:5px;border-radius:50%;background:#203845;z-index:4}
+.eye.e1{left:28px}.eye.e2{left:42px}
+.bodyy{position:absolute;top:38px;left:10px;width:52px;height:32px;border-radius:15px 15px 10px 10px;border:3px solid #25485a;background:var(--shirt,#ffbc6f)}
+.bodyy:after{content:"";position:absolute;left:11px;bottom:-10px;width:24px;height:10px;border-left:6px solid #25485a;border-right:6px solid #25485a}
+.director .hair{background:#8a979b}.director .bodyy{background:#efe7d6}.director .bodyy:before{content:"";position:absolute;left:21px;top:4px;border-left:5px solid transparent;border-right:5px solid transparent;border-top:15px solid #2c7b85}
+.node{
+  display:flex;flex-direction:column;align-items:center;gap:8px;transform:translateY(0);transition:.25s;
+}
+.node:hover{transform:translateY(-7px)}
+.node-bubble{padding:8px 12px;border-radius:14px;background:#fffefb;border:2px solid #1d4b5d;box-shadow:0 6px 0 rgba(29,75,93,.13);font-weight:900;font-size:13px;white-space:nowrap}
+.landmark{position:absolute;transform:translate(-50%,-50%);z-index:2;background:rgba(255,255,255,.85);border-radius:18px;padding:10px 12px;border:1px solid rgba(16,59,70,.1);box-shadow:0 16px 26px rgba(17,61,71,.12);font-weight:800;color:#1c5363;display:flex;align-items:center;gap:10px;transition:.24s}
+.landmark:hover{transform:translate(-50%,-56%) scale(1.03)}
+.walker{position:absolute;left:27%;top:49%;width:58px;height:72px;z-index:4;transition:left .8s ease, top .8s ease;pointer-events:none}
+.walker .shadow{position:absolute;left:8px;bottom:4px;width:40px;height:12px;background:rgba(27,78,90,.16);border-radius:50%;filter:blur(2px)}
+.walker .character{transform:scale(.82)}
+.explorer-bubble{position:absolute;right:16px;bottom:16px;width:min(380px,calc(100% - 32px));background:rgba(255,255,255,.88);backdrop-filter:blur(14px);border-radius:24px;padding:18px 18px 16px;border:1px solid rgba(18,63,73,.1);box-shadow:0 16px 36px rgba(18,63,73,.14);z-index:5}
+.explorer-bubble h3{margin:0 0 8px;font-size:18px;color:#1a4554}
+.explorer-bubble p{margin:0;color:#5d787f;line-height:1.75;font-size:13px}
+.explorer-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.mini-btn{padding:10px 14px;border-radius:999px;background:#eff7f7;color:#1b5963;font-weight:800;border:1px solid rgba(21,86,92,.1)}
+.mini-btn.primary{background:linear-gradient(135deg,#1b5668,#1db890);color:white}
+.section{max-width:1240px;margin:0 auto;padding:34px 18px 0}
+.panel-grid{display:grid;grid-template-columns:1.18fr .82fr;gap:18px;margin-top:20px}
+.panel-card{background:var(--card);backdrop-filter:blur(12px);border:1px solid rgba(18,63,73,.08);border-radius:28px;padding:22px;box-shadow:0 16px 40px rgba(18,63,73,.07)}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.section-head h2{margin:6px 0 0;font-size:clamp(28px,3.2vw,42px);color:#143848}
+.section-head p{margin:0;color:#67818a;line-height:1.8;font-size:13px}
+.kicker{font-size:12px;font-weight:900;letter-spacing:.16em;color:#2c8a8b}
+.quest-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.quest{padding:16px;border-radius:18px;background:var(--card-2);border:1px solid rgba(18,63,73,.08)}
+.quest b{display:block;color:#184253;font-size:15px}.quest span{display:block;margin-top:6px;font-size:13px;color:#627c84;line-height:1.7}.quest strong{display:block;margin-top:8px;color:#1ca07c}
+.timeline{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.year-chip{padding:16px;border-radius:20px;background:linear-gradient(180deg,#fff,#f5fbfa);border:1px solid rgba(18,63,73,.08);box-shadow:0 8px 18px rgba(18,63,73,.04);text-align:left;transition:.22s}
+.year-chip:hover{transform:translateY(-4px)}
+.year-chip b{display:block;font-size:28px;color:#297d88}.year-chip h3{margin:6px 0 7px;font-size:17px}.year-chip p{margin:0;color:#627c84;line-height:1.7;font-size:13px}
+.area-wall{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.area-card{padding:18px;border-radius:22px;background:linear-gradient(180deg,#ffffff,#f6fbfa);border:1px solid rgba(18,63,73,.08);transition:.22s}
+.area-card:hover{transform:translateY(-4px);box-shadow:0 14px 26px rgba(18,63,73,.07)}
+.area-card .icon{font-size:28px}.area-card h3{margin:10px 0 6px;font-size:17px}.area-card p{margin:0;color:#667f86;line-height:1.75;font-size:13px}
+.footer-note{margin-top:22px;padding:16px 18px;border-radius:18px;background:#fff8e8;border:1px solid #efddaf;color:#7a6437;font-size:13px;line-height:1.9}
+.footer-note b{color:#81581f}
+.dock{position:sticky;bottom:18px;z-index:10;display:flex;justify-content:center;pointer-events:none;padding:20px 0 28px}
+.dock-inner{pointer-events:auto;display:flex;gap:10px;flex-wrap:wrap;justify-content:center;background:rgba(255,255,255,.82);backdrop-filter:blur(16px);border:1px solid rgba(18,63,73,.1);box-shadow:0 18px 36px rgba(18,63,73,.1);padding:12px;border-radius:999px}
+.dock-btn{padding:12px 16px;border-radius:999px;background:transparent;color:#174151;font-weight:900}
+.dock-btn.active,.dock-btn:hover{background:#eef8f8;color:#126b70}
+.overlay{position:fixed;inset:0;background:rgba(8,28,39,.46);display:none;justify-content:flex-end;z-index:60}
+.overlay.open{display:flex}
+.panel{width:min(560px,100%);height:100%;overflow:auto;background:rgba(250,253,252,.97);backdrop-filter:blur(16px);box-shadow:-18px 0 50px rgba(12,41,53,.16);padding:28px 24px 32px;animation:slideIn .25s ease}
+@keyframes slideIn{from{transform:translateX(30px);opacity:.7}to{transform:translateX(0);opacity:1}}
+.panel-top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.panel-kicker{font-size:12px;font-weight:900;letter-spacing:.16em;color:#2c8a8b}
+.close{width:42px;height:42px;border-radius:50%;background:white;border:1px solid rgba(18,63,73,.08);font-size:24px;color:#204a59;box-shadow:0 8px 18px rgba(18,63,73,.08)}
+.panel h2{margin:16px 0 8px;font-size:32px;line-height:1.28;color:#153a4b}
+.panel .lead{color:#5f7980;line-height:1.9;font-size:14px}
+.dialog{margin:18px 0;padding:16px 18px;border-radius:18px;background:#ebf8f2;color:#275f60;font-size:14px;line-height:1.85;border-left:5px solid #7cc3a7}
+.subsec{margin:22px 0 0}
+.subsec h3{font-size:16px;margin:0 0 10px;color:#234f5d}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{display:inline-flex;align-items:center;gap:8px;background:white;border:1px solid rgba(18,63,73,.1);padding:10px 12px;border-radius:12px;font-size:13px;font-weight:800;color:#335b67}
+.chip input{accent-color:#15967a}
+.progress-line{margin-top:14px}.bar{height:10px;border-radius:999px;background:#e4efee;overflow:hidden}.fill{height:100%;background:linear-gradient(90deg,#1a5c6d,#1db890);width:0;transition:width .2s}
+.route{display:flex;align-items:flex-start;gap:10px;padding:8px 0;border-left:3px solid #98c9ba;margin-left:8px;padding-left:14px;font-size:14px;line-height:1.75;color:#45656d}
+.route b{color:#226466}
+.choice-grid{display:grid;grid-template-columns:1fr;gap:10px;margin-top:12px}.choice-grid button{padding:14px 14px;border-radius:16px;background:white;border:1px solid rgba(18,63,73,.08);text-align:left;font-weight:800;color:#2d5967}.choice-grid button:hover{background:#f6fbfa}
+.search{width:100%;padding:14px 15px;border-radius:16px;border:1px solid rgba(18,63,73,.1);margin-top:14px;margin-bottom:16px;outline-color:#1ca07c;color:#16404f}
+.result-group{margin-bottom:18px;padding-bottom:18px;border-bottom:1px dashed rgba(18,63,73,.1)}
+.result-group:last-child{border-bottom:none;padding-bottom:0}
+.path-row{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:10px}.path-node{padding:9px 12px;border-radius:999px;background:white;border:1px solid rgba(18,63,73,.09);font-size:13px;font-weight:800;color:#2b5a66}.path-arrow{color:#6ca59b;font-weight:900}.mini{font-size:12px;color:#748a91;line-height:1.8}.empty{padding:18px;border-radius:16px;background:#fff;font-size:13px;color:#6d8389;border:1px solid rgba(18,63,73,.08)}
+@media (max-width:1080px){.panel-grid{grid-template-columns:1fr}.timeline,.area-wall,.quest-grid,.stat-strip{grid-template-columns:repeat(2,minmax(0,1fr))}.main-island{height:680px}.island-map{padding:30px}}
+@media (max-width:760px){
+  .topbar{padding:18px 14px;align-items:flex-start;flex-direction:column}
+  .hero-copy h1{font-size:40px}
+  .timeline,.area-wall,.quest-grid,.stat-strip{grid-template-columns:1fr}
+  .main-island{height:980px}
+  .island-core{inset:80px 24px 60px}
+  .path1{left:49%;top:17%;height:650px}
+  .path2{left:10%;top:47%;width:84%}
+  .district[data-id='y1']{left:28% !important;top:22% !important}
+  .district[data-id='y2']{left:28% !important;top:52% !important}
+  .district[data-id='y3']{left:73% !important;top:39% !important}
+  .district[data-id='y4']{left:68% !important;top:74% !important}
+  .district[data-id='director']{left:52% !important;top:10% !important}
+  .landmark{font-size:12px;padding:8px 10px}
+  .explorer-bubble{position:relative;right:auto;bottom:auto;width:auto;margin:0 14px 14px}
+  .island-stage{min-height:1080px}
+}
+
+/* Miniature campus art direction */
+body{background:#f2f5ed}.hero{background:linear-gradient(180deg,#f3f6ed,#e5efea)}
+.hero-copy h1{font-size:clamp(34px,4.5vw,62px);letter-spacing:-.035em}.hero-copy p{max-width:660px;font-weight:400}
+.stat-strip{display:none}.island-shell{margin-top:28px;max-width:1440px}.island-stage{min-height:0;padding-top:54px;background:radial-gradient(ellipse at 37% 20%,#d9efdf,#9ccdd1 74%);border-radius:28px;box-shadow:0 24px 70px #335c5b18}
+.island-stage:before{background:none}.island-map{position:relative;padding:0;display:block;overflow:auto}.main-island{width:100%;height:auto;aspect-ratio:1000/600;min-width:720px}.campus-model{position:absolute;inset:0;width:100%;height:100%}
+.explorer-bubble{position:relative;right:auto;bottom:auto;margin:0 20px 18px;width:calc(100% - 40px);display:grid;grid-template-columns:1fr auto;gap:4px 24px;padding:16px 22px;box-shadow:none;border-radius:18px;background:#f6faf0d9}.explorer-bubble h3{font-size:16px}.explorer-bubble p{grid-column:1}.explorer-actions{grid-column:2;grid-row:1/3;align-items:center;margin:0}
+.scene-toolbar{position:absolute;top:15px;left:24px;right:24px;display:flex;justify-content:space-between;align-items:center;z-index:5;font-size:12px;color:#326469;letter-spacing:.1em}.scene-toolbar button{background:#ffffffa8;padding:8px 14px;border:1px solid #ffffffaa;border-radius:30px;color:#315c5b;font-size:12px}.scene-toolbar .dot{display:inline-block;width:6px;height:6px;background:#408e72;border-radius:50%;margin-right:8px}
+.main-island .district.node{position:absolute!important;left:var(--x,48%)!important;top:var(--y,29%)!important;transform:translate(-50%,-100%)!important;transition:none;gap:0;padding:0;z-index:5;width:64px;height:76px;justify-content:flex-end}
+.main-island .district .zone-card,.main-island .node-bubble{padding:4px 8px;border:1px solid #ffffffab;background:#fffff0e8;border-radius:20px;box-shadow:0 3px 8px #244d4920;min-width:0;max-width:none;white-space:nowrap;position:absolute;bottom:53px}.main-island .zone-card b,.main-island .node-bubble{font-size:11px}.main-island .zone-card small{display:none}
+.main-island .character{transform:scale(.57);transform-origin:bottom center;flex-shrink:0;filter:drop-shadow(4px 5px 2px #30574630)}
+.main-island .head{border:0;background:linear-gradient(110deg,#ffe1b3,#dca581);border-radius:48%}.main-island .hair{background:linear-gradient(100deg,#536063,#303e45)}.main-island .bodyy{border:0;background:linear-gradient(110deg,#ffffff55,transparent),var(--shirt,#ebbd79);border-radius:15px 15px 8px 8px}.main-island .bodyy:after{display:none}.main-island .eye{width:3px;height:4px}.limb{position:absolute;transform-origin:50% 3px;border-radius:8px}.leg{top:65px;width:9px;height:18px;background:#3f555e;left:22px}.leg.right{left:40px}.arm{top:40px;left:7px;width:8px;height:27px;background:var(--shirt,#ebbd79)}.arm.right{left:58px}.leg:after{content:'';position:absolute;bottom:-2px;left:-2px;width:13px;height:6px;background:#f6f0dc;border-radius:4px}.arm:after{content:'';position:absolute;bottom:0;width:8px;height:7px;background:#e5b28d;border-radius:4px}
+.is-walking .leg.left,.is-walking .arm.right{animation:stride .56s ease-in-out infinite alternate}.is-walking .leg.right,.is-walking .arm.left{animation:stride .56s ease-in-out infinite alternate-reverse}.is-walking .head,.is-walking .hair,.is-walking .eye{animation:bob .28s ease-in-out infinite alternate}@keyframes stride{from{transform:rotate(-27deg)}to{transform:rotate(27deg)}}@keyframes bob{to{translate:0 -2px}}
+.main-island .district:hover .zone-card,.main-island .district:focus-visible .zone-card{background:#fff;box-shadow:0 0 0 3px #72aaa67a}.main-island .district:focus-visible{outline:2px solid #236e79;border-radius:16px}
+.main-island .landmark{left:var(--x)!important;top:var(--y)!important;transform:translate(-50%,-50%);padding:5px 10px;font-size:11px;gap:4px;border-radius:20px;background:#fffcedeb;box-shadow:0 5px 12px #30584c16;border:1px solid #fffaf0;z-index:3}.main-island .landmark:hover{transform:translate(-50%,-55%);background:#fff}.walker{display:none}.wave-rings{opacity:.4}.paused .limb,.paused .head,.paused .hair,.paused .eye{animation-play-state:paused!important}
+@media(max-width:760px){.island-stage{min-height:0;border-radius:22px}.island-map{padding:0}.main-island{height:auto;min-width:720px;aspect-ratio:1000/600}.hero-copy{margin-top:0}.hero-copy h1{font-size:35px}.explorer-bubble{display:block;margin:0 12px 12px;width:calc(100% - 24px);padding:16px}.explorer-actions{margin-top:12px}.scene-toolbar{left:16px;right:16px;font-size:10px}.island-shell{padding:0 8px}.topbar{padding:18px}.top-actions{gap:4px}.top-actions .pill{font-size:11px;padding:8px}.brand{font-size:10px;gap:7px}.brand-badge{width:34px;height:34px;font-size:19px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.clouds span,.wave-rings span{animation:none}}
+
+.hero-copy{padding-bottom:8px}.hero-copy h1{color:#214d52}.island-stage{background:radial-gradient(ellipse at 30% 10%,#e0efe0,#98c7cf 70%,#78adb9)}
+.tour-console{position:relative;background:#fffdf5;border:1px solid #e2e9dc;border-radius:24px;padding:24px;margin:18px 20px;box-shadow:0 10px 30px #244e4910;color:#254c50}.tour-console h2{font-size:24px;margin:10px 0}.tour-console p{font-size:17px;line-height:1.85;margin:10px 0;max-width:900px}.tour-kicker{font-size:12px;letter-spacing:.16em;color:#628780}.tour-tabs,.tour-actions{display:flex;gap:8px;flex-wrap:wrap}.tour-tabs button,.tour-actions button{border:1px solid #d6e4d9;border-radius:24px;background:#f0f5ed;color:#285959;padding:10px 18px;font:inherit}.tour-tabs button[aria-current=true],.tour-actions .primary{background:#285e63;color:white;border-color:#285e63}.tour-actions button:disabled{opacity:.45}.tour-actions{margin-top:18px}.tour-track{height:4px;background:#e4eadd;border-radius:4px;margin-top:18px}.tour-track i{display:block;height:100%;background:#ce9f60;transition:width .3s;width:0}.tour-status{font-size:13px;color:#628780;margin-top:12px}.tour-selected .zone-card{background:#295f63!important;color:white!important;box-shadow:0 0 0 5px #fff8!important}.tour-selected .zone-card b{color:white!important}.tour-destination{filter:drop-shadow(0 0 7px #ffedaa)}.source-note{font-size:13px;line-height:1.8;color:#627b7b;padding:0 24px 22px}.source-note a{color:#245e68}.sea-boat{animation:sail 15s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}@keyframes sail{to{translate:35px -8px;rotate:3deg}}@media(max-width:760px){.tour-console{padding:18px;margin:12px}.tour-console h2{font-size:21px}.tour-console p{font-size:16px}.tour-tabs button{padding:8px 12px}.tour-actions button{padding:9px 12px}}@media(prefers-reduced-motion:reduce){.sea-boat{animation:none}}
+</style>
+</head>
+<body>
+<div class="hero">
+  <div class="clouds" aria-hidden="true"><span class="c1"></span><span class="c2"></span><span class="c3"></span></div>
+  <header class="topbar">
+    <div class="brand"><div class="brand-badge">⚓</div><div>國立臺灣海洋大學<br>電機工程學系・學程探索島 · 微縮校園</div></div>
+    <div class="top-actions">
+      <button class="pill" id="topGuide">玩法導覽</button>
+      <button class="pill" id="topSearch">課程搜尋</button>
+      <button class="pill" id="topDirector">系主任介紹</button>
+    </div>
+  </header>
+
+  <section class="hero-copy">
+    <div class="eyebrow">NTOU ELECTRICAL ENGINEERING · CAMPUS JOURNEY</div>
+    <h1>跟著學長姐的腳步，<br>走進海大電機四年。</h1>
+    <p>沿著海風與步道，遇見正在散步的大一到大四學生。點選學生認識課程，拜訪六座領域學院，或請系主任帶你看見四年的學習風景。</p>
+    <div class="hero-cta">
+      <button class="btn-main" id="startExploreBtn">開始動態導覽</button>
+      <button class="btn-sub" id="openConnectionsBtn">查看課程關聯</button>
+    </div>
+  </section>
+
+  <div class="stat-strip">
+    <div class="stat-card"><b>4</b><span>四位學生對應大一到大四學習階段</span></div>
+    <div class="stat-card"><b>6</b><span>六大專業領域，協助理解大四延伸方向</span></div>
+    <div class="stat-card"><b>20+</b><span>依文件整理的核心課程與學習節點</span></div>
+    <div class="stat-card"><b>1</b><span>位系主任導覽角色，帶你串起整體學程</span></div>
+  </div>
+
+  <div class="island-shell">
+    <div class="island-stage" id="islandStage">
+      <div class="wave-rings" aria-hidden="true"><span class="w1"></span><span class="w2"></span><span class="w3"></span></div>
+      <div class="island-map">
+        <div class="main-island">
+<svg class="campus-model" viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg" aria-label="微縮海島校園：六座學院建築、中央廣場與環島步道" role="img"><defs>
+<linearGradient id="grass" x2=".7" y2="1"><stop stop-color="#c0dca1"/><stop offset="1" stop-color="#78b694"/></linearGradient>
+<linearGradient id="cliff" x2="0" y2="1"><stop stop-color="#d7b991"/><stop offset="1" stop-color="#a08b75"/></linearGradient>
+<linearGradient id="water" x2=".8" y2="1"><stop stop-color="#bce8df"/><stop offset="1" stop-color="#62b8bf"/></linearGradient>
+<linearGradient id="roof" x2="1" y2="1"><stop stop-color="#487f84"/><stop offset="1" stop-color="#28565e"/></linearGradient>
+<radialGradient id="leaf"><stop stop-color="#a6cb8c"/><stop offset="1" stop-color="#4e8f78"/></radialGradient>
+<filter id="soft"><feGaussianBlur stdDeviation="9"/></filter>
+<filter id="shadow" x="-50%" y="-50%" width="200%" height="200%"><feDropShadow dx="6" dy="9" stdDeviation="4" flood-color="#315d58" flood-opacity=".18"/></filter>
+</defs>
+<ellipse cx="510" cy="385" rx="402" ry="165" fill="#317980" opacity=".16" filter="url(#soft)"/>
+<path d="M145 250 C102 203 176 135 292 133 C340 72 479 87 543 112 C655 72 785 130 805 185 C906 201 937 287 883 343 C923 413 813 471 702 468 C617 537 476 521 415 489 C285 511 178 454 173 408 C82 373 81 296 145 250 Z" transform="translate(0 24)" fill="none" stroke="#ecfaf0" stroke-width="42" opacity=".28"/>
+<path d="M145 250 C102 203 176 135 292 133 C340 72 479 87 543 112 C655 72 785 130 805 185 C906 201 937 287 883 343 C923 413 813 471 702 468 C617 537 476 521 415 489 C285 511 178 454 173 408 C82 373 81 296 145 250 Z" transform="translate(0 28)" fill="url(#cliff)"/>
+<path d="M145 250 C102 203 176 135 292 133 C340 72 479 87 543 112 C655 72 785 130 805 185 C906 201 937 287 883 343 C923 413 813 471 702 468 C617 537 476 521 415 489 C285 511 178 454 173 408 C82 373 81 296 145 250 Z" transform="translate(0 9)" fill="#ead6ae" stroke="#f2dfb9" stroke-width="18"/>
+<path d="M145 250 C102 203 176 135 292 133 C340 72 479 87 543 112 C655 72 785 130 805 185 C906 201 937 287 883 343 C923 413 813 471 702 468 C617 537 476 521 415 489 C285 511 178 454 173 408 C82 373 81 296 145 250 Z" fill="url(#grass)" stroke="#f6e5c4" stroke-width="13"/>
+<path d="M204 352 C258 320 241 230 330 236 S473 295 520 257 S670 209 741 266 S796 369 713 390 S568 428 500 382 S284 420 204 352Z" fill="none" stroke="#609c80" stroke-width="30" opacity=".2" transform="translate(0 4)"/>
+<path id="campusLoop" d="M204 352 C258 320 241 230 330 236 S473 295 520 257 S670 209 741 266 S796 369 713 390 S568 428 500 382 S284 420 204 352Z" fill="none" stroke="#f1e4ca" stroke-width="26"/>
+<path d="M500 382 Q480 317 520 257 M420 275 L486 181" fill="none" stroke="#f1e4ca" stroke-width="20" stroke-linecap="round"/>
+<ellipse cx="497" cy="324" rx="67" ry="38" fill="#e3d5b9"/>
+<ellipse cx="497" cy="321" rx="62" ry="35" fill="#f8edd8" stroke="#fff7e3" stroke-width="3"/>
+<ellipse cx="497" cy="321" rx="26" ry="15" fill="#8bbdb5" stroke="#cfdfcb" stroke-width="6"/>
+<ellipse cx="497" cy="318" rx="22" ry="12" fill="url(#water)"/>
+<path d="M497 319 Q487 287 480 305 M497 319 Q504 287 514 305 M497 319 L497 294" fill="none" stroke="#e9fff6" stroke-width="2.5"/>
+<path d="M605 443 C630 422 712 425 718 447 S682 481 634 469Z" fill="#ecdfc3"/>
+<path d="M612 443 C642 430 698 431 705 447 S672 472 639 462Z" fill="url(#water)"/>
+<path d="M638 448 Q660 443 685 448" fill="none" stroke="#d3f5ed" stroke-width="2"/>
+<g transform="translate(300 208) scale(0.78)" filter="url(#shadow)"><ellipse cx="0" cy="12" rx="75" ry="28" fill="#396956" opacity=".13"/><path d="M-58 -54 L7 -78 L62 -48 L-3 -24Z" fill="#fdf5de"/><path d="M-58 -54 L-3 -24 V26 L-58 -4Z" fill="#f4e8ce"/><path d="M-3 -24 L62 -48 V2 L-3 26Z" fill="#c9cbb9"/><path d="M-66 -59 L5 -91 L70 -53 L-3 -22Z" fill="#d7a172"/><path d="M-66 -59 L-3 -22 V-14 L-66 -51Z" fill="#30575d"/><path d="M-3 -22 L70 -53 V-45 L-3 -14Z" fill="#446a6b"/><path d="M-48 -38 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-46 -35 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-33 -30 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-31 -27 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-18 -22 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-16 -19 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M8 -18 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M10 -16 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M24 -24 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M26 -22 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M40 -30 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M42 -28 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M-23 15 V-5 L-10 2 V22Z" fill="#39646b"/><path d="M-31 17 l22 12 11 -4 -23 -12Z" fill="#e4d6b9"/><path d="M-15 -94 Q8 -64 29 -103Z" fill="#edf1df" stroke="#b4c7bd" stroke-width="2"/><path d="M7 -85 L10 -73 M7 -85 L29 -103" stroke="#6d9690" stroke-width="3"/></g><g transform="translate(851 326) scale(0.85)" filter="url(#shadow)"><ellipse cx="0" cy="12" rx="75" ry="28" fill="#396956" opacity=".13"/><path d="M-58 -54 L7 -78 L62 -48 L-3 -24Z" fill="#fdf5de"/><path d="M-58 -54 L-3 -24 V26 L-58 -4Z" fill="#f4e8ce"/><path d="M-3 -24 L62 -48 V2 L-3 26Z" fill="#c9cbb9"/><path d="M-66 -59 L5 -91 L70 -53 L-3 -22Z" fill="#c99178"/><path d="M-66 -59 L-3 -22 V-14 L-66 -51Z" fill="#30575d"/><path d="M-3 -22 L70 -53 V-45 L-3 -14Z" fill="#446a6b"/><path d="M-48 -38 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-46 -35 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-33 -30 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-31 -27 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-18 -22 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-16 -19 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M8 -18 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M10 -16 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M24 -24 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M26 -22 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M40 -30 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M42 -28 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M-23 15 V-5 L-10 2 V22Z" fill="#39646b"/><path d="M-31 17 l22 12 11 -4 -23 -12Z" fill="#e4d6b9"/><path d="M-34 -64 L1 -79 25 -65 -11 -51Z" fill="#527c89" stroke="#a5c6bc" stroke-width="2"/><path d="M-22 -68 L1 -55 M-10 -73 L14 -60 M-23 -58 L12 -73" stroke="#a6c8c5" opacity=".6"/></g><g transform="translate(425 475) scale(0.8)" filter="url(#shadow)"><ellipse cx="0" cy="12" rx="75" ry="28" fill="#396956" opacity=".13"/><path d="M-58 -54 L7 -78 L62 -48 L-3 -24Z" fill="#fdf5de"/><path d="M-58 -54 L-3 -24 V26 L-58 -4Z" fill="#f4e8ce"/><path d="M-3 -24 L62 -48 V2 L-3 26Z" fill="#c9cbb9"/><path d="M-66 -59 L5 -91 L70 -53 L-3 -22Z" fill="#6f9997"/><path d="M-66 -59 L-3 -22 V-14 L-66 -51Z" fill="#30575d"/><path d="M-3 -22 L70 -53 V-45 L-3 -14Z" fill="#446a6b"/><path d="M-48 -38 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-46 -35 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-33 -30 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-31 -27 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-18 -22 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-16 -19 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M8 -18 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M10 -16 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M24 -24 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M26 -22 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M40 -30 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M42 -28 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M-23 15 V-5 L-10 2 V22Z" fill="#39646b"/><path d="M-31 17 l22 12 11 -4 -23 -12Z" fill="#e4d6b9"/><path d="M-34 -64 L1 -79 25 -65 -11 -51Z" fill="#527c89" stroke="#a5c6bc" stroke-width="2"/><path d="M-22 -68 L1 -55 M-10 -73 L14 -60 M-23 -58 L12 -73" stroke="#a6c8c5" opacity=".6"/></g><g transform="translate(601 335) scale(0.72)" filter="url(#shadow)"><ellipse cx="0" cy="12" rx="75" ry="28" fill="#396956" opacity=".13"/><path d="M-58 -54 L7 -78 L62 -48 L-3 -24Z" fill="#fdf5de"/><path d="M-58 -54 L-3 -24 V26 L-58 -4Z" fill="#f4e8ce"/><path d="M-3 -24 L62 -48 V2 L-3 26Z" fill="#c9cbb9"/><path d="M-66 -59 L5 -91 L70 -53 L-3 -22Z" fill="#7c92a0"/><path d="M-66 -59 L-3 -22 V-14 L-66 -51Z" fill="#30575d"/><path d="M-3 -22 L70 -53 V-45 L-3 -14Z" fill="#446a6b"/><path d="M-48 -38 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-46 -35 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-33 -30 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-31 -27 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-18 -22 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-16 -19 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M8 -18 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M10 -16 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M24 -24 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M26 -22 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M40 -30 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M42 -28 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M-23 15 V-5 L-10 2 V22Z" fill="#39646b"/><path d="M-31 17 l22 12 11 -4 -23 -12Z" fill="#e4d6b9"/><path d="M-34 -64 L1 -79 25 -65 -11 -51Z" fill="#527c89" stroke="#a5c6bc" stroke-width="2"/><path d="M-22 -68 L1 -55 M-10 -73 L14 -60 M-23 -58 L12 -73" stroke="#a6c8c5" opacity=".6"/></g><g transform="translate(684 201) scale(0.72)" filter="url(#shadow)"><ellipse cx="0" cy="12" rx="75" ry="28" fill="#396956" opacity=".13"/><path d="M-58 -54 L7 -78 L62 -48 L-3 -24Z" fill="#fdf5de"/><path d="M-58 -54 L-3 -24 V26 L-58 -4Z" fill="#f4e8ce"/><path d="M-3 -24 L62 -48 V2 L-3 26Z" fill="#c9cbb9"/><path d="M-66 -59 L5 -91 L70 -53 L-3 -22Z" fill="#799a99"/><path d="M-66 -59 L-3 -22 V-14 L-66 -51Z" fill="#30575d"/><path d="M-3 -22 L70 -53 V-45 L-3 -14Z" fill="#446a6b"/><path d="M-48 -38 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-46 -35 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-33 -30 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-31 -27 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-18 -22 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-16 -19 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M8 -18 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M10 -16 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M24 -24 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M26 -22 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M40 -30 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M42 -28 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M-23 15 V-5 L-10 2 V22Z" fill="#39646b"/><path d="M-31 17 l22 12 11 -4 -23 -12Z" fill="#e4d6b9"/><path d="M3 -72 V-142 M-13 -75 L3 -142 20 -73 M-8 -99 H13" fill="none" stroke="#e9e9d9" stroke-width="5"/><circle cx="3" cy="-145" r="5" fill="#e9aa6d"/><path d="M-10 -151 Q-22 -145 -10 -133 M16 -151 Q28 -145 16 -133" fill="none" stroke="#75b2af" stroke-width="3"/></g><g transform="translate(211 428) scale(0.64)" filter="url(#shadow)"><ellipse cx="0" cy="12" rx="75" ry="28" fill="#396956" opacity=".13"/><path d="M-58 -54 L7 -78 L62 -48 L-3 -24Z" fill="#fdf5de"/><path d="M-58 -54 L-3 -24 V26 L-58 -4Z" fill="#f4e8ce"/><path d="M-3 -24 L62 -48 V2 L-3 26Z" fill="#c9cbb9"/><path d="M-66 -59 L5 -91 L70 -53 L-3 -22Z" fill="#d3b17c"/><path d="M-66 -59 L-3 -22 V-14 L-66 -51Z" fill="#30575d"/><path d="M-3 -22 L70 -53 V-45 L-3 -14Z" fill="#446a6b"/><path d="M-48 -38 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-46 -35 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-33 -30 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-31 -27 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-18 -22 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-16 -19 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M8 -18 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M10 -16 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M24 -24 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M26 -22 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M40 -30 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M42 -28 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M-23 15 V-5 L-10 2 V22Z" fill="#39646b"/><path d="M-31 17 l22 12 11 -4 -23 -12Z" fill="#e4d6b9"/><path d="M-34 -64 L1 -79 25 -65 -11 -51Z" fill="#527c89" stroke="#a5c6bc" stroke-width="2"/><path d="M-22 -68 L1 -55 M-10 -73 L14 -60 M-23 -58 L12 -73" stroke="#a6c8c5" opacity=".6"/></g><g transform="translate(475 175) scale(1.05)" filter="url(#shadow)"><ellipse cx="0" cy="12" rx="75" ry="28" fill="#396956" opacity=".13"/><path d="M-58 -54 L7 -78 L62 -48 L-3 -24Z" fill="#fdf5de"/><path d="M-58 -54 L-3 -24 V26 L-58 -4Z" fill="#f4e8ce"/><path d="M-3 -24 L62 -48 V2 L-3 26Z" fill="#c9cbb9"/><path d="M-66 -59 L5 -91 L70 -53 L-3 -22Z" fill="#497f83"/><path d="M-66 -59 L-3 -22 V-14 L-66 -51Z" fill="#30575d"/><path d="M-3 -22 L70 -53 V-45 L-3 -14Z" fill="#446a6b"/><path d="M-48 -38 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-46 -35 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-33 -30 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-31 -27 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M-18 -22 l9 5 v18 l-9 -5Z" fill="#688f92"/><path d="M-16 -19 l5 3 v5 l-5 -3Z" fill="#c9e7dc"/><path d="M8 -18 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M10 -16 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M24 -24 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M26 -22 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M40 -30 l10 -4 v17 l-10 4Z" fill="#5b7e80"/><path d="M42 -28 l6 -2 v5 l-6 2Z" fill="#b1d7d1"/><path d="M-23 15 V-5 L-10 2 V22Z" fill="#39646b"/><path d="M-31 17 l22 12 11 -4 -23 -12Z" fill="#e4d6b9"/><path d="M-34 -64 L1 -79 25 -65 -11 -51Z" fill="#527c89" stroke="#a5c6bc" stroke-width="2"/><path d="M-22 -68 L1 -55 M-10 -73 L14 -60 M-23 -58 L12 -73" stroke="#a6c8c5" opacity=".6"/></g><g><ellipse cx="194" cy="244" rx="19" ry="7.6000000000000005" fill="#3b6a59" opacity=".15"/><path d="M185 220 V242" stroke="#8e7960" stroke-width="5"/><ellipse cx="185" cy="209" rx="19" ry="21.28" fill="url(#leaf)"/><ellipse cx="180" cy="201" rx="10.450000000000001" ry="11.4" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="219" cy="217" rx="24" ry="9.600000000000001" fill="#3b6a59" opacity=".15"/><path d="M210 193 V215" stroke="#8e7960" stroke-width="5"/><ellipse cx="210" cy="182" rx="24" ry="26.880000000000003" fill="url(#leaf)"/><ellipse cx="205" cy="174" rx="13.200000000000001" ry="14.399999999999999" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="257" cy="191" rx="22" ry="8.8" fill="#3b6a59" opacity=".15"/><path d="M248 167 V189" stroke="#8e7960" stroke-width="5"/><ellipse cx="248" cy="156" rx="22" ry="24.64" fill="url(#leaf)"/><ellipse cx="243" cy="148" rx="12.100000000000001" ry="13.2" fill="#b2d497" opacity=".4"/></g><g transform="translate(45 -10)"><g><ellipse cx="309" cy="172" rx="18" ry="7.2" fill="#3b6a59" opacity=".15"/><path d="M300 148 V170" stroke="#8e7960" stroke-width="5"/><ellipse cx="300" cy="137" rx="18" ry="20.160000000000004" fill="url(#leaf)"/><ellipse cx="295" cy="129" rx="9.9" ry="10.799999999999999" fill="#b2d497" opacity=".4"/></g></g><g><ellipse cx="384" cy="178" rx="22" ry="8.8" fill="#3b6a59" opacity=".15"/><path d="M375 154 V176" stroke="#8e7960" stroke-width="5"/><ellipse cx="375" cy="143" rx="22" ry="24.64" fill="url(#leaf)"/><ellipse cx="370" cy="135" rx="12.100000000000001" ry="13.2" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="393" cy="200" rx="17" ry="6.800000000000001" fill="#3b6a59" opacity=".15"/><path d="M384 176 V198" stroke="#8e7960" stroke-width="5"/><ellipse cx="384" cy="165" rx="17" ry="19.040000000000003" fill="url(#leaf)"/><ellipse cx="379" cy="157" rx="9.350000000000001" ry="10.2" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="579" cy="169" rx="24" ry="9.600000000000001" fill="#3b6a59" opacity=".15"/><path d="M570 145 V167" stroke="#8e7960" stroke-width="5"/><ellipse cx="570" cy="134" rx="24" ry="26.880000000000003" fill="url(#leaf)"/><ellipse cx="565" cy="126" rx="13.200000000000001" ry="14.399999999999999" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="607" cy="182" rx="18" ry="7.2" fill="#3b6a59" opacity=".15"/><path d="M598 158 V180" stroke="#8e7960" stroke-width="5"/><ellipse cx="598" cy="147" rx="18" ry="20.160000000000004" fill="url(#leaf)"/><ellipse cx="593" cy="139" rx="9.9" ry="10.799999999999999" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="772" cy="228" rx="22" ry="8.8" fill="#3b6a59" opacity=".15"/><path d="M763 204 V226" stroke="#8e7960" stroke-width="5"/><ellipse cx="763" cy="193" rx="22" ry="24.64" fill="url(#leaf)"/><ellipse cx="758" cy="185" rx="12.100000000000001" ry="13.2" fill="#b2d497" opacity=".4"/></g><g transform="translate(0 -52)"><g><ellipse cx="836" cy="291" rx="23" ry="9.200000000000001" fill="#3b6a59" opacity=".15"/><path d="M827 267 V289" stroke="#8e7960" stroke-width="5"/><ellipse cx="827" cy="256" rx="23" ry="25.76" fill="url(#leaf)"/><ellipse cx="822" cy="248" rx="12.65" ry="13.799999999999999" fill="#b2d497" opacity=".4"/></g></g><g><ellipse cx="843" cy="383" rx="21" ry="8.4" fill="#3b6a59" opacity=".15"/><path d="M834 359 V381" stroke="#8e7960" stroke-width="5"/><ellipse cx="834" cy="348" rx="21" ry="23.520000000000003" fill="url(#leaf)"/><ellipse cx="829" cy="340" rx="11.55" ry="12.6" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="799" cy="429" rx="19" ry="7.6000000000000005" fill="#3b6a59" opacity=".15"/><path d="M790 405 V427" stroke="#8e7960" stroke-width="5"/><ellipse cx="790" cy="394" rx="19" ry="21.28" fill="url(#leaf)"/><ellipse cx="785" cy="386" rx="10.450000000000001" ry="11.4" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="557" cy="473" rx="22" ry="8.8" fill="#3b6a59" opacity=".15"/><path d="M548 449 V471" stroke="#8e7960" stroke-width="5"/><ellipse cx="548" cy="438" rx="22" ry="24.64" fill="url(#leaf)"/><ellipse cx="543" cy="430" rx="12.100000000000001" ry="13.2" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="529" cy="484" rx="16" ry="6.4" fill="#3b6a59" opacity=".15"/><path d="M520 460 V482" stroke="#8e7960" stroke-width="5"/><ellipse cx="520" cy="449" rx="16" ry="17.92" fill="url(#leaf)"/><ellipse cx="515" cy="441" rx="8.8" ry="9.6" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="289" cy="439" rx="22" ry="8.8" fill="#3b6a59" opacity=".15"/><path d="M280 415 V437" stroke="#8e7960" stroke-width="5"/><ellipse cx="280" cy="404" rx="22" ry="24.64" fill="url(#leaf)"/><ellipse cx="275" cy="396" rx="12.100000000000001" ry="13.2" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="319" cy="455" rx="17" ry="6.800000000000001" fill="#3b6a59" opacity=".15"/><path d="M310 431 V453" stroke="#8e7960" stroke-width="5"/><ellipse cx="310" cy="420" rx="17" ry="19.040000000000003" fill="url(#leaf)"/><ellipse cx="305" cy="412" rx="9.350000000000001" ry="10.2" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="150" cy="325" rx="17" ry="6.800000000000001" fill="#3b6a59" opacity=".15"/><path d="M141 301 V323" stroke="#8e7960" stroke-width="5"/><ellipse cx="141" cy="290" rx="17" ry="19.040000000000003" fill="url(#leaf)"/><ellipse cx="136" cy="282" rx="9.350000000000001" ry="10.2" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="349" cy="334" rx="18" ry="7.2" fill="#3b6a59" opacity=".15"/><path d="M340 310 V332" stroke="#8e7960" stroke-width="5"/><ellipse cx="340" cy="299" rx="18" ry="20.160000000000004" fill="url(#leaf)"/><ellipse cx="335" cy="291" rx="9.9" ry="10.799999999999999" fill="#b2d497" opacity=".4"/></g><g><ellipse cx="370" cy="354" rx="13" ry="5.2" fill="#3b6a59" opacity=".15"/><path d="M361 330 V352" stroke="#8e7960" stroke-width="5"/><ellipse cx="361" cy="319" rx="13" ry="14.560000000000002" fill="url(#leaf)"/><ellipse cx="356" cy="311" rx="7.15" ry="7.8" fill="#b2d497" opacity=".4"/></g><g transform="translate(308 353)"><path d="M-12 -4 l24 8 v5 l-24 -8Z" fill="#b29069"/><path d="M-9 2 v7 M9 8 v7" stroke="#617e70" stroke-width="3"/><path d="M-12 -10 l24 8 v5 l-24 -8Z" fill="#cfaf80"/></g><g transform="translate(435 360)"><path d="M-12 -4 l24 8 v5 l-24 -8Z" fill="#b29069"/><path d="M-9 2 v7 M9 8 v7" stroke="#617e70" stroke-width="3"/><path d="M-12 -10 l24 8 v5 l-24 -8Z" fill="#cfaf80"/></g><g transform="translate(559 255)"><path d="M-12 -4 l24 8 v5 l-24 -8Z" fill="#b29069"/><path d="M-9 2 v7 M9 8 v7" stroke="#617e70" stroke-width="3"/><path d="M-12 -10 l24 8 v5 l-24 -8Z" fill="#cfaf80"/></g><g transform="translate(706 343)"><path d="M-12 -4 l24 8 v5 l-24 -8Z" fill="#b29069"/><path d="M-9 2 v7 M9 8 v7" stroke="#617e70" stroke-width="3"/><path d="M-12 -10 l24 8 v5 l-24 -8Z" fill="#cfaf80"/></g><g transform="translate(565 442)"><path d="M-12 -4 l24 8 v5 l-24 -8Z" fill="#b29069"/><path d="M-9 2 v7 M9 8 v7" stroke="#617e70" stroke-width="3"/><path d="M-12 -10 l24 8 v5 l-24 -8Z" fill="#cfaf80"/></g><g transform="translate(208 308)"><path d="M-12 -4 l24 8 v5 l-24 -8Z" fill="#b29069"/><path d="M-9 2 v7 M9 8 v7" stroke="#617e70" stroke-width="3"/><path d="M-12 -10 l24 8 v5 l-24 -8Z" fill="#cfaf80"/></g><g transform="translate(827 464) rotate(-12)"><ellipse cy="16" rx="35" ry="9" fill="#508f99" opacity=".2"/><path d="M-30 0 H30 L15 14 H-16Z" fill="#f7edd5"/><path d="M0 -53 V0 H-25Z" fill="#fff9e8"/><path d="M4 -43 V-2 H24Z" fill="#d0a384"/></g><g class="sea-boat" transform="translate(860 475)"><ellipse cy="17" rx="35" ry="6" fill="#d9f2ec" opacity=".65"/><path d="M-29 6 H30 L18 17 H-15Z" fill="#f9f2db"/><path d="M-5 5 V-43 L24 2Z" fill="#fffdf0"/><path d="M-9 -33 V2 H-28Z" fill="#c88968"/><path d="M-5 -43 V8" stroke="#497379" stroke-width="2"/></g><text x="475" y="155" text-anchor="middle" fill="#fcf5df" font-size="12" font-weight="700">NTOU · EE</text></svg>          <button class="district node" data-id="director" style="left:51%;top:13%">
+            <div class="node-bubble">系主任總導覽</div>
+            <div class="character director">
+              <div class="hair"></div><div class="head"></div><div class="eye e1"></div><div class="eye e2"></div><div class="bodyy"></div>
+            </div>
+          </button>
+
+          <button class="district node" data-id="y1" style="left:24%;top:28%;--shirt:#ffbc73">
+            <div class="zone-card"><b>大一 · 基礎啟航</b><small>微積分、普通物理、程式語言、電路學起步</small></div>
+            <div class="character" style="--shirt:#ffbc73">
+              <div class="hair"></div><div class="head"></div><div class="eye e1"></div><div class="eye e2"></div><div class="bodyy"></div>
+            </div>
+          </button>
+
+          <button class="district node" data-id="y2" style="left:27%;top:62%;--shirt:#8ad6a4">
+            <div class="zone-card"><b>大二 · 核心鍛鍊</b><small>電路、電子、電磁、訊號分析逐步深化</small></div>
+            <div class="character" style="--shirt:#8ad6a4">
+              <div class="hair"></div><div class="head"></div><div class="eye e1"></div><div class="eye e2"></div><div class="bodyy"></div>
+            </div>
+          </button>
+
+          <button class="district node" data-id="y3" style="left:71%;top:33%;--shirt:#91baf0">
+            <div class="zone-card"><b>大三 · 專業探索</b><small>控制、電機機械、通訊與電子電路開始整合</small></div>
+            <div class="character" style="--shirt:#91baf0">
+              <div class="hair"></div><div class="head"></div><div class="eye e1"></div><div class="eye e2"></div><div class="bodyy"></div>
+            </div>
+          </button>
+
+          <button class="district node" data-id="y4" style="left:71%;top:70%;--shirt:#ed9ec3">
+            <div class="zone-card"><b>大四 · 領域深耕</b><small>六大領域與專題方向逐漸成形</small></div>
+            <div class="character" style="--shirt:#ed9ec3">
+              <div class="hair"></div><div class="head"></div><div class="eye e1"></div><div class="eye e2"></div><div class="bodyy"></div>
+            </div>
+          </button>
+
+          <button class="landmark" data-area="0" style="left:13%;top:48%">📡 通訊港</button>
+          <button class="landmark" data-area="1" style="left:79%;top:51%">⚡ 電路站</button>
+          <button class="landmark" data-area="2" style="left:40%;top:79%">🤖 控制坊</button>
+          <button class="landmark" data-area="3" style="left:56%;top:55%">🧬 晶片室</button>
+          <button class="landmark" data-area="4" style="left:76%;top:18%">🌐 電波塔</button>
+          <button class="landmark" data-area="5" style="left:19%;top:74%">💻 資訊屋</button>
+
+          <div class="walker" id="walker" aria-hidden="true">
+            <div class="shadow"></div>
+            <div class="character" style="--shirt:#ffd778">
+              <div class="hair"></div><div class="head"></div><div class="eye e1"></div><div class="eye e2"></div><div class="bodyy"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="explorer-bubble">
+        <h3 id="expTitle">🏝️ 歡迎來到學程探索島</h3>
+        <p id="expText">點選島上的年級學生、系主任或六大領域地標，就能打開互動介紹面板。下方還有探索任務、四年時間線與領域總覽。</p>
+        <div class="explorer-actions">
+          <button class="mini-btn primary" id="expOpen">從大一開始</button>
+          <button class="mini-btn" id="expGuide">看導覽玩法</button>
+          <button class="mini-btn" id="expReset">重置探索進度</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="panel-grid">
+    <div class="panel-card">
+      <div class="section-head">
+        <div><div class="kicker">EXPEDITION LOG</div><h2>探索任務與紀錄</h2></div>
+        <p id="progressSummary">已探索 0 / 11 個地點</p>
+      </div>
+      <div class="quest-grid" id="questGrid"></div>
+    </div>
+    <div class="panel-card">
+      <div class="section-head">
+        <div><div class="kicker">ISLAND QUICK MENU</div><h2>快速入口</h2></div>
+        <p>用不同方式進入同一份課程資料。</p>
+      </div>
+      <div class="choice-grid">
+        <button id="quickYear1">👣 先看大一與大二基礎課程</button>
+        <button id="quickDirector">🎓 先請系主任總覽四年學程</button>
+        <button id="quickAreas">🧭 我想直接看六大專業領域</button>
+        <button id="quickSearch">🔎 我想搜尋特定課程名稱</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="panel-card">
+    <div class="section-head">
+      <div><div class="kicker">FOUR-YEAR JOURNEY</div><h2>四年學習時間線</h2></div>
+      <p>依文件整理大一到大四的主軸。</p>
+    </div>
+    <div class="timeline" id="timeline"></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="panel-card">
+    <div class="section-head">
+      <div><div class="kicker">SPECIALIZATION AREAS</div><h2>六大專業領域牆</h2></div>
+      <p>作為理解學程方向的入口，不直接取代正式課規。</p>
+    </div>
+    <div class="area-wall" id="areaWall"></div>
+    <div class="footer-note"><b>資料提醒：</b> 兩份上傳文件都圍繞「電機系大學部必修與核心課程關聯圖」，但對大三／大四的領域選修門數出現 <b>「六選三」</b> 與 <b>「六選四（必選）」</b> 的差異；本網頁保留提醒，不自行替學校判定正式規定。</div>
+  </div>
+</section>
+
+<div class="dock">
+  <div class="dock-inner">
+    <button class="dock-btn" id="dockGuide">玩法</button>
+    <button class="dock-btn" id="dockDirector">系主任</button>
+    <button class="dock-btn" id="dockPaths">關聯圖</button>
+    <button class="dock-btn" id="dockSearch">搜尋</button>
+    <button class="dock-btn" id="dockTop">回到島上</button>
+  </div>
+</div>
+
+<div class="overlay" id="overlay" aria-hidden="true">
+  <aside class="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle">
+    <div class="panel-top">
+      <div class="panel-kicker" id="panelKicker">EXPLORE</div>
+      <button class="close" id="closeBtn" aria-label="關閉">×</button>
+    </div>
+    <div id="panelBody"></div>
+  </aside>
+</div>
+
+<script>
+const years=[
+  {n:1,name:'大一｜基礎啟航',desc:'從微積分、普通物理、程式語言與電路基本概念出發，建立電機學習的底座。',quote:'歡迎登島！大一先把數學、物理與程式基礎打穩。',sem:[['計算機概論','計算機實習','普通物理','普通物理實驗','程式語言','微積分'],['普通物理','普通物理實驗','微積分','工程數學','電路學','交換電路與邏輯設計']]},
+  {n:2,name:'大二｜核心鍛鍊',desc:'把電路、電子、電磁與數學工具串起來，也開始接觸實驗與分析。',quote:'大二開始會更像真正進入電機核心，理論與實驗會一起變多。',sem:[['工程數學','電磁學','線性代數','電路學','電子學','電工實驗'],['電子學','電工實驗','電磁波','訊號與系統','機率學','資料結構','複變函數']]},
+  {n:3,name:'大三｜專業探索',desc:'接觸自動控制、電機機械、通訊工程與電子電路，開始思考未來專長。',quote:'到了大三，課程會更專業，也更能感受到不同領域的差異。',sem:[['電子學','電工實驗','近代物理','自動控制','電機機械','通訊工程'],['電子電路','電工實驗','領域選修（文件標示有差異）']]},
+  {n:4,name:'大四｜領域深耕',desc:'在六大領域中逐漸形成自己的方向，結合專題與未來升學／就業路線。',quote:'大四重點不是只把課修完，而是把前面三年的知識整合成自己的方向。',sem:[['電工實驗','通訊與訊號處理領域','電力與電子電路領域','控制領域','固態電子領域','電波領域','資訊科技領域'],[]]}
+];
+
+const areas=[
+  {name:'通訊與訊號處理',icon:'📡',short:'讓資訊能準確傳輸，也能被系統理解與處理。',intro:'結合訊號與系統、機率學與通訊工程等基礎，理解聲音、影像、資料與無線通訊的處理方式。',related:['訊號與系統','機率學','通訊工程'],future:'可延伸到通訊系統、數位訊號處理與相關應用。'},
+  {name:'電力與電子電路',icon:'⚡',short:'從電路設計延伸到能量、電子與系統整合。',intro:'以電路學、電子學、電子電路與電機機械為重要基礎，建立電子與電力系統的核心觀念。',related:['電路學','電子學','電子電路','電機機械'],future:'可延伸到電子電路、電力系統與能源相關方向。'},
+  {name:'控制',icon:'🤖',short:'讓設備能感測、判斷與穩定運作。',intro:'透過工程數學、訊號與系統、自動控制等概念，理解系統如何維持穩定並達成目標。',related:['工程數學','訊號與系統','自動控制'],future:'可延伸到控制系統、自動化與智慧設備。'},
+  {name:'固態電子',icon:'🧬',short:'進入半導體與電子元件的物理世界。',intro:'從普通物理、電子學與近代物理出發，建立半導體元件與固態電子的理解基礎。',related:['普通物理','電子學','近代物理'],future:'可延伸到半導體、元件設計與固態電子相關領域。'},
+  {name:'電波',icon:'🌐',short:'認識電磁波在空間中的傳播與應用。',intro:'從電磁學、電磁波與數學工具出發，理解波動、傳播與電波應用的基礎。',related:['電磁學','電磁波','工程數學'],future:'可延伸到電磁、天線與電波技術等方向。'},
+  {name:'資訊科技',icon:'💻',short:'用程式、邏輯與資料結構解決問題。',intro:'以計算機概論、程式語言、資料結構與交換電路與邏輯設計為基礎，理解資訊技術的應用。',related:['計算機概論','程式語言','資料結構','交換電路與邏輯設計'],future:'可延伸到軟體開發、系統設計與資訊應用方向。'}
+];
+
+const tracks=[
+  {title:'電路與電子',steps:['微積分','電路學','電子學','電子電路'],desc:'以數學與電路概念作為理解電子電路的知識路線。'},
+  {title:'電磁與電波',steps:['普通物理','電磁學','電磁波','電波領域'],desc:'從基本物理延伸到電磁波與電波相關方向。'},
+  {title:'控制系統',steps:['工程數學','訊號與系統','自動控制','控制領域'],desc:'數學工具與系統概念逐步帶進控制學習。'},
+  {title:'通訊與訊號',steps:['機率學','訊號與系統','通訊工程','通訊與訊號處理領域'],desc:'從隨機概念到訊號分析，再進入通訊應用。'},
+  {title:'資訊科技',steps:['計算機概論','程式語言','資料結構','資訊科技領域'],desc:'從基礎計算、程式走向資料結構與資訊應用。'}
+];
+
+const spots=[
+  {id:'y1',type:'year',index:0,title:'大一｜基礎啟航',text:'大一先建立微積分、普通物理、程式語言與電路的基礎。'},
+  {id:'y2',type:'year',index:1,title:'大二｜核心鍛鍊',text:'大二深入電子、電路、電磁與訊號分析，也開始更多實驗。'},
+  {id:'y3',type:'year',index:2,title:'大三｜專業探索',text:'大三逐步接觸控制、電機機械、通訊工程與電子電路。'},
+  {id:'y4',type:'year',index:3,title:'大四｜領域深耕',text:'大四聚焦六大領域，逐漸形成自己的專長方向。'},
+  {id:'director',type:'director',title:'系主任導覽',text:'想快速理解整體學程，可以先和系主任對話。'},
+  {id:'area0',type:'area',index:0,title:'通訊港',text:'從訊號與系統、機率學延伸到通訊工程。'},
+  {id:'area1',type:'area',index:1,title:'電路站',text:'電路、電子與電子電路的重要入口。'},
+  {id:'area2',type:'area',index:2,title:'控制坊',text:'工程數學與自動控制會在這裡串起來。'},
+  {id:'area3',type:'area',index:3,title:'晶片室',text:'從電子學與近代物理認識固態電子。'},
+  {id:'area4',type:'area',index:4,title:'電波塔',text:'從電磁學前往電磁波與電波相關應用。'},
+  {id:'area5',type:'area',index:5,title:'資訊屋',text:'程式語言、資料結構與邏輯設計的方向。'}
+];
+
+const quests=[
+  {name:'基礎啟航',ids:['y1','y2'],desc:'先認識大一與大二'},
+  {name:'專業成長',ids:['y3','y4'],desc:'再認識大三與大四'},
+  {name:'與系主任交流',ids:['director'],desc:'拜訪一次總導覽角色'},
+  {name:'探索六大領域',ids:['area0','area1','area2','area3','area4','area5'],desc:'走訪所有領域地標'}
+];
+
+const overlay=document.getElementById('overlay');
+const panelBody=document.getElementById('panelBody');
+const panelKicker=document.getElementById('panelKicker');
+const expTitle=document.getElementById('expTitle');
+const expText=document.getElementById('expText');
+const walker=document.getElementById('walker');
+const questGrid=document.getElementById('questGrid');
+const progressSummary=document.getElementById('progressSummary');
+let currentSpot='y1';
+let seen=new Set();
+try{seen=new Set(JSON.parse(localStorage.getItem('ntou-ee-v3-seen')||'[]'))}catch(e){}
+
+function saveSeen(){try{localStorage.setItem('ntou-ee-v3-seen', JSON.stringify([...seen]))}catch(e){}}
+function escapeHtml(str){return String(str).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function showPanel(html,kicker='EXPLORE'){panelBody.innerHTML=html;panelKicker.textContent=kicker;overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';document.getElementById('closeBtn').focus()}
+function closePanel(){overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow=''}
+document.getElementById('closeBtn').onclick=closePanel;
+overlay.addEventListener('click',e=>{if(e.target===overlay)closePanel()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePanel()});
+
+function courseCheckbox(course,year){
+  const key=`ntou-ee-v3-${year}-${course}`;
+  const checked=localStorage.getItem(key)==='1' ? 'checked' : '';
+  return `<label class="chip"><input type="checkbox" data-course="${escapeHtml(key)}" ${checked}><span>${escapeHtml(course)}</span></label>`;
+}
+function bindCourseChecks(){
+  panelBody.querySelectorAll('[data-course]').forEach(input=>{
+    input.addEventListener('change',()=>{
+      localStorage.setItem(input.dataset.course, input.checked ? '1':'0');
+      updatePanelProgress();
+    });
+  });
+  updatePanelProgress();
+}
+function updatePanelProgress(){
+  const checks=[...panelBody.querySelectorAll('[data-course]')];
+  const done=checks.filter(i=>i.checked).length;
+  const text=document.getElementById('progressText');
+  const fill=document.getElementById('progressFill');
+  if(text) text.textContent=`已勾選 ${done} / ${checks.length} 項（僅供個人瀏覽紀錄）`;
+  if(fill) fill.style.width=(checks.length ? done/checks.length*100 : 0)+'%';
+}
+
+function renderYear(i){
+  const y=years[i];
+  showPanel(`
+    <h2 id="panelTitle">${y.name}</h2>
+    <p class="lead">${y.desc}</p>
+    <div class="dialog">💬 學生說：「${y.quote}」</div>
+    ${y.sem.map((sem,idx)=>sem.length?`<div class="subsec"><h3>${idx===0?'上學期':'下學期'} · 文件所列課程</h3><div class="chips">${sem.map(c=>courseCheckbox(c,y.n)).join('')}</div></div>`:'').join('')}
+    <div class="subsec progress-line">
+      <div class="bar"><div class="fill" id="progressFill"></div></div>
+      <p class="mini" id="progressText"></p>
+      <p class="mini">這裡的勾選只作為個人探索紀錄，不代表正式畢業學分或修課完成。</p>
+    </div>
+    <div class="choice-grid">
+      <button id="nextYearBtn">${i<3?'繼續看下一個年級 →':'與系主任聊整體學程 →'}</button>
+      <button id="seePathsBtn">查看推薦知識路線 →</button>
+    </div>
+  `, `YEAR 0${i+1} / 04`);
+  bindCourseChecks();
+  document.getElementById('nextYearBtn').onclick=()=> i<3 ? renderYear(i+1) : renderDirector();
+  document.getElementById('seePathsBtn').onclick=renderPaths;
+}
+
+function renderArea(i){
+  const a=areas[i];
+  showPanel(`
+    <h2 id="panelTitle">${a.icon} ${a.name}領域</h2>
+    <p class="lead">${a.short}</p>
+    <div class="dialog">🎓 系主任（示意）：「${a.intro}」</div>
+    <div class="subsec"><h3>可以先認識的基礎課程</h3><div class="chips">${a.related.map(c=>`<span class="chip">${c}</span>`).join('')}</div></div>
+    <div class="subsec"><h3>延伸方向</h3><div class="route"><b>→</b><span>${a.future}</span></div></div>
+    <div class="choice-grid">
+      <button id="directorTalkBtn">請系主任幫我整體串起來 →</button>
+      <button id="searchAreaBtn">搜尋相關課程 →</button>
+    </div>
+    <p class="mini">以上為協助理解領域的示意整理，並非學校正式公布的完整選修清單。</p>
+  `, `SPECIALIZATION / 0${i+1}`);
+  document.getElementById('directorTalkBtn').onclick=renderDirector;
+  document.getElementById('searchAreaBtn').onclick=renderSearch;
+}
+
+function renderDirector(){
+  showPanel(`
+    <h2 id="panelTitle">系主任的學程導覽 👋</h2>
+    <p class="lead">這位系主任是導覽用的卡通角色，介紹文字根據你上傳的兩份課程關聯圖整理，不代表現任系主任的逐字發言。</p>
+    <div class="dialog" id="directorReply">🎓「大一先打底，大二建立核心能力，大三開始分化與整合，大四則朝領域深耕前進。」</div>
+    <div class="subsec"><h3>你想先問什麼？</h3>
+      <div class="choice-grid">
+        <button data-q="years">🗓️ 我想知道大一到大四會學什麼</button>
+        <button data-q="areas">🧭 六大專業領域是哪些？</button>
+        <button data-q="rule">⚠ 六選三還是六選四？</button>
+        <button data-q="paths">🔗 有沒有建議的理解路線？</button>
+      </div>
+    </div>
+    <div class="subsec"><h3>四年主線</h3>${years.map((y,idx)=>`<div class="route"><b>0${idx+1}</b><span>${y.name.split('｜')[1]}｜${y.desc}</span></div>`).join('')}</div>
+    <div class="choice-grid"><button id="fullPathsBtn">查看完整課程關聯圖 →</button></div>
+  `,'DIRECTOR GUIDE');
+  const replies={
+    years:'大一以微積分、物理與程式奠基；大二進入電路、電子、電磁與系統；大三開始接觸控制、電機機械、通訊與電子電路；大四則往六大領域深化。',
+    areas:'六大領域包括：通訊與訊號處理、電力與電子電路、控制、固態電子、電波、資訊科技。',
+    rule:'你上傳的兩份資料，一份標示「六選三」，另一份寫「六選四（必選）」。本網頁保留這個差異提醒，不自行判定正式規定，請以你入學年度的系上最新課規為準。',
+    paths:'可以把課程理解為幾條知識路線，例如：電路學 → 電子學 → 電子電路；工程數學 → 訊號與系統 → 自動控制。這是幫助理解的順序，不一定等於正式先修限制。'
+  };
+  panelBody.querySelectorAll('[data-q]').forEach(btn=>btn.onclick=()=>{
+    document.getElementById('directorReply').textContent='🎓 系主任（示意）：「'+replies[btn.dataset.q]+'」';
+  });
+  document.getElementById('fullPathsBtn').onclick=renderPaths;
+}
+
+function renderPaths(){
+  showPanel(`
+    <h2 id="panelTitle">課程知識關聯圖</h2>
+    <p class="lead">以下是依兩份課程關聯圖整理的「建議理解順序」，用來幫助你掌握知識脈絡，不代表學校正式先修規定。</p>
+    ${tracks.map(t=>`<div class="subsec"><h3>${t.title}</h3><div class="path-row">${t.steps.map((s,i)=>`${i?'<span class="path-arrow">→</span>':''}<span class="path-node">${s}</span>`).join('')}</div><p class="mini">${t.desc}</p></div>`).join('')}
+    <div class="footer-note"><b>再次提醒：</b> 正式的先修規定、開課學期與各領域選修門數，仍請以系上當年度公告為準。</div>
+  `,'COURSE PATHS');
+}
+
+function renderSearch(){
+  showPanel(`
+    <h2 id="panelTitle">課程搜尋</h2>
+    <p class="lead">輸入課程名稱關鍵字，快速找到它出現在哪一年、哪個學期。</p>
+    <input class="search" id="courseSearch" placeholder="搜尋：電子學、工程數學、訊號與系統…" aria-label="搜尋課程">
+    <div id="searchResults"></div>
+  `,'COURSE SEARCH');
+  const input=document.getElementById('courseSearch');
+  const results=document.getElementById('searchResults');
+  function update(){
+    const q=input.value.trim();
+    let total=0;
+    const html=years.map((y,yi)=>{
+      const matches=y.sem.map((sem,si)=>({term:si===0?'上學期':'下學期',courses:sem.filter(c=>c.includes(q))})).filter(s=>s.courses.length);
+      total+=matches.reduce((sum,m)=>sum+m.courses.length,0);
+      if(!matches.length) return '';
+      return `<div class="result-group"><h3>${y.name}</h3>${matches.map(m=>`<p class="mini">${m.term}</p><div class="chips">${m.courses.map(c=>`<span class="chip">${c}</span>`).join('')}</div>`).join('')}<div class="choice-grid"><button data-go-year="${yi}">查看這一年 →</button></div></div>`;
+    }).join('');
+    results.innerHTML=total?html:'<div class="empty">找不到符合的課程，請換個關鍵字試試。</div>';
+    results.querySelectorAll('[data-go-year]').forEach(btn=>btn.onclick=()=>renderYear(+btn.dataset.goYear));
+  }
+  input.addEventListener('input',update);
+  update();
+  input.focus();
+}
+
+function renderGuide(){
+  showPanel(`
+    <h2 id="panelTitle">學程島怎麼探索？</h2>
+    <p class="lead">這版網頁是把課程資料做成更像遊戲地圖的互動導覽。你可以用角色、地標、搜尋與知識路線四種方式理解同一份課程資料。</p>
+    <div class="subsec">
+      <div class="route"><b>01</b><span>點四位學生：看大一到大四各學期的課程內容。</span></div>
+      <div class="route"><b>02</b><span>點系主任：快速聽四年學程與六大領域的總覽。</span></div>
+      <div class="route"><b>03</b><span>點六大地標：從「領域」角度理解可能的發展方向。</span></div>
+      <div class="route"><b>04</b><span>用課程搜尋：直接找課名，快速定位到年級與學期。</span></div>
+      <div class="route"><b>05</b><span>勾選課程：建立自己的探索紀錄，瀏覽器會自動保存。</span></div>
+    </div>
+    <div class="choice-grid"><button id="guideStartBtn">從大一開始 →</button></div>
+  `,'HOW TO PLAY');
+  document.getElementById('guideStartBtn').onclick=()=>renderYear(0);
+}
+
+function markSeen(id){seen.add(id); saveSeen(); updateQuests();}
+function moveWalkerToElement(el){
+  const stageRect=document.getElementById('islandStage').getBoundingClientRect();
+  const rect=el.getBoundingClientRect();
+  const x=((rect.left+rect.width/2-stageRect.left)/stageRect.width)*100;
+  const y=((rect.top+rect.height/2-stageRect.top)/stageRect.height)*100;
+  walker.style.left=x+'%'; walker.style.top=y+'%';
+}
+function activateSpot(id){
+  currentSpot=id;
+  const meta=spots.find(s=>s.id===id);
+  if(!meta) return;
+  expTitle.textContent='✨ '+meta.title;
+  expText.textContent=meta.text;
+  markSeen(id);
+}
+function openSpot(id){
+  const meta=spots.find(s=>s.id===id);
+  if(!meta) return;
+  if(meta.type==='year') renderYear(meta.index);
+  else if(meta.type==='area') renderArea(meta.index);
+  else renderDirector();
+}
+function updateQuests(){
+  progressSummary.textContent=`已探索 ${seen.size} / ${spots.length} 個地點`;
+  questGrid.innerHTML=quests.map(q=>{
+    const count=q.ids.filter(id=>seen.has(id)).length;
+    const done=count===q.ids.length;
+    return `<div class="quest"><b>${done?'✅':'🗺️'} ${q.name}</b><span>${q.desc}</span><strong>${count} / ${q.ids.length} 完成</strong></div>`;
+  }).join('');
+}
+
+function bindIsland(){
+  document.querySelectorAll('.district[data-id]').forEach(el=>{
+    el.addEventListener('click',()=>{
+      moveWalkerToElement(el);
+      activateSpot(el.dataset.id);
+      setTimeout(()=>openSpot(el.dataset.id),180);
+    });
+  });
+  document.querySelectorAll('.landmark[data-area]').forEach(el=>{
+    el.addEventListener('click',()=>{
+      moveWalkerToElement(el);
+      const id='area'+el.dataset.area;
+      activateSpot(id);
+      setTimeout(()=>openSpot(id),180);
+    });
+  });
+}
+
+function buildTimeline(){
+  document.getElementById('timeline').innerHTML=years.map((y,i)=>`<button class="year-chip" data-year-card="${i}"><b>0${i+1}</b><h3>${y.name.split('｜')[1]}</h3><p>${y.desc}</p></button>`).join('');
+  document.querySelectorAll('[data-year-card]').forEach(btn=>btn.onclick=()=>renderYear(+btn.dataset.yearCard));
+}
+function buildAreas(){
+  document.getElementById('areaWall').innerHTML=areas.map((a,i)=>`<button class="area-card" data-area-card="${i}"><div class="icon">${a.icon}</div><h3>${a.name}</h3><p>${a.short}</p></button>`).join('');
+  document.querySelectorAll('[data-area-card]').forEach(btn=>btn.onclick=()=>renderArea(+btn.dataset.areaCard));
+}
+
+// top buttons
+startExploreBtn.onclick=()=>{document.getElementById('islandStage').scrollIntoView({behavior:'smooth',block:'center'}); renderYear(0)};
+openConnectionsBtn.onclick=renderPaths;
+expOpen.onclick=()=>renderYear(0);
+expGuide.onclick=renderGuide;
+expReset.onclick=()=>{if(confirm('要清除本機探索紀錄嗎？')){seen.clear(); saveSeen(); updateQuests(); expTitle.textContent='🏝️ 歡迎來到學程探索島'; expText.textContent='點選島上的年級學生、系主任或六大領域地標，就能打開互動介紹面板。下方還有探索任務、四年時間線與領域總覽。';}};
+
+topGuide.onclick=renderGuide; topSearch.onclick=renderSearch; topDirector.onclick=renderDirector;
+dockGuide.onclick=renderGuide; dockDirector.onclick=renderDirector; dockPaths.onclick=renderPaths; dockSearch.onclick=renderSearch; dockTop.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+quickYear1.onclick=()=>renderYear(0); quickDirector.onclick=renderDirector; quickAreas.onclick=()=>renderArea(0); quickSearch.onclick=renderSearch;
+
+buildTimeline();
+buildAreas();
+bindIsland();
+updateQuests();
+</script>
+<script>
+// Guided walking tour, with all coordinates on the existing campus path.
+(()=>{
+const map=document.querySelector('.main-island'),stage=document.getElementById('islandStage'),path=document.getElementById('campusLoop'),length=path.getTotalLength();
+const positions=[[30,40],[85.1,60],[42.5,84],[60.1,62],[68.4,39],[21.1,77]];
+document.querySelectorAll('.landmark').forEach((e,i)=>{e.style.setProperty('--x',positions[i][0]+'%');e.style.setProperty('--y',positions[i][1]+'%')});
+const director=document.querySelector('[data-id="director"]');director.style.setProperty('--x','48.6%');director.style.setProperty('--y','33%');
+const students=[...document.querySelectorAll('.district[data-id^="y"]')].map((el,i)=>({el,d:length*i/4,speed:22+i*3,rest:0,untilRest:5+i*3,hover:false}));
+document.querySelectorAll('.district .character').forEach(e=>{['leg left','leg right','arm left','arm right'].forEach(c=>{let limb=document.createElement('i');limb.className='limb '+c;e.append(limb)})});
+students.forEach(s=>{s.el.addEventListener('pointerenter',()=>s.hover=true);s.el.addEventListener('pointerleave',()=>s.hover=false)});
+const reduce=matchMedia('(prefers-reduced-motion: reduce)');let paused=reduce.matches,last=0,tour=-1,target=null,arrived=false,auto=false,elapsed=0;
+const toolbar=document.createElement('div');toolbar.className='scene-toolbar';toolbar.innerHTML='<span>海大電機 · 動態學程導覽</span><button id="motionToggle">暫停散步</button>';stage.prepend(toolbar);
+const box=document.createElement('section');box.className='tour-console';box.setAttribute('aria-label','動態導覽控制');box.innerHTML='<div class="tour-kicker">FOLLOW THE STUDENTS / 五站學程旅程</div><h2 id="tourTitle">讓系主任與學長姐帶你走一圈</h2><div class="tour-tabs">'+['系主任','大一','大二','大三','大四'].map((x,i)=>'<button data-stop="'+i+'">'+x+'</button>').join('')+'</div><p id="tourText" aria-live="polite">按下開始，從系主任的歡迎廣場出發。每一站由學生沿步道走到集合點，再介紹課程與學習方向。</p><div class="tour-actions"><button class="primary" id="tourNext">開始導覽 →</button><button id="tourPrev" disabled>上一站</button><button id="tourDetail">課程詳情</button><button id="tourAuto" aria-pressed="false">自動導覽：關</button><button id="tourExit">自由探索</button></div><div class="tour-track"><i id="tourProgress"></i></div><div class="tour-status" id="tourStatus">可隨時切換年級，或直接點選島上人物。</div>';
+stage.after(box);
+box.insertAdjacentHTML('afterend','<div class="source-note">本圖為原創學程示意島，非海大實際建築配置；系主任為虛構導覽角色。課程沿用上傳文件，學期與修業要求請依入學年度確認。參考：<a href="https://ee.ntou.edu.tw/p/412-1062-7491.php?Lang=zh-tw" target="_blank" rel="noopener">海大電機六大學域</a> · <a href="https://ee.ntou.edu.tw/p/412-1062-7484.php?Lang=zh-tw" target="_blank" rel="noopener">官方課程關聯圖</a></div>');
+const $=id=>document.getElementById(id);
+const talks=[['系主任｜歡迎來到海大電機','歡迎！海大電機的學習旅程由數學、物理與程式基礎出發，再走向電路、電子、電磁與系統。接下來請四位學長姐帶路，看看每個階段如何連接到六大學域。'],['大一｜把基礎變成工具','我是大一學生，先帶你到基礎學習集合點。微積分幫助描述變化，普通物理建立現象的直覺，程式語言讓想法變成可執行的步驟。接著再把這些工具帶入電路與邏輯。'],['大二｜從公式走進電路','這一站是核心課程集合點。電路學處理電壓與電流，電子學認識元件如何放大與切換，電磁學解釋場的行為。搭配電工實驗，練習把計算、模擬與量測互相比較。'],['大三｜找到你想深入的方向','走到專業探索集合點，開始比較自動控制、通訊工程、電機機械與電子電路。你可以從想解決的問題出發，再回頭找需要的數學與系統知識，逐步形成專題方向。'],['大四｜把課程串成自己的作品','最後來到整合學習集合點。依興趣探索通訊與訊號處理、控制、電力、固態電子、電波與資訊科技。將課程知識整合進專題，留下設計、實測與改進的證據。']];
+const destinations=[[300,236],[741,266],[713,390],[330,390]];
+function nearest(x,y){let best=0,dist=Infinity;for(let d=0;d<length;d+=3){const p=path.getPointAtLength(d),v=(p.x-x)**2+(p.y-y)**2;if(v<dist){dist=v;best=d}}return best}
+function finish(){arrived=true;elapsed=0;expTitle.textContent=talks[tour][0];expText.textContent=talks[tour][1];$('tourText').textContent=talks[tour][1];$('tourStatus').textContent=tour===0?'系主任正在介紹四年學習旅程。':'學生已抵達集合點。可以查看課程，或前往下一站。';markSeen(tour===0?'director':'y'+tour)}
+function go(i){closePanel();tour=i;target=null;arrived=false;elapsed=0;students.forEach(s=>s.el.classList.remove('tour-selected'));$('tourTitle').textContent=talks[i][0];expTitle.textContent=talks[i][0];expText.textContent='學生正在沿步道帶路，抵達集合點後開始介紹。';$('tourProgress').style.width=((i+1)/5*100)+'%';box.querySelectorAll('[data-stop]').forEach(b=>b.setAttribute('aria-current',String(+b.dataset.stop===i)));$('tourPrev').disabled=i===0;$('tourNext').textContent=i===4?'重新導覽 ↻':'下一站 →';if(i===0)finish();else{const s=students[i-1];s.el.classList.add('tour-selected');target=nearest(...destinations[i-1]);s.rest=0;$('tourText').textContent='跟上我的腳步，我們沿著校園步道前往這一站的集合點。';$('tourStatus').textContent='學生帶路中…抵達後顯示介紹。';if(reduce.matches){s.d=target;finish()}}}
+box.querySelectorAll('[data-stop]').forEach(b=>b.onclick=()=>go(+b.dataset.stop));$('tourNext').onclick=()=>go((tour+1)%5);$('tourPrev').onclick=()=>go(Math.max(0,tour-1));$('tourDetail').onclick=()=>tour>0?renderYear(tour-1):renderDirector();$('tourAuto').onclick=()=>{auto=!auto;elapsed=0;$('tourAuto').textContent='自動導覽：'+(auto?'開':'關');$('tourAuto').setAttribute('aria-pressed',String(auto));if(auto&&tour<0)go(0)};
+$('tourExit').onclick=()=>{tour=-1;auto=false;target=null;students.forEach(s=>s.el.classList.remove('tour-selected'));$('tourTitle').textContent='自由探索｜點選人物與領域地標';$('tourText').textContent='學生恢復散步。你可以直接查看課程、搜尋課名，或隨時重新開始導覽。';$('tourStatus').textContent='自由探索中';expTitle.textContent='自由探索';expText.textContent='點選學生開始帶路，或點六大地標了解學域。';$('tourAuto').textContent='自動導覽：關';$('tourAuto').setAttribute('aria-pressed','false');$('tourNext').textContent='開始導覽 →';$('tourPrev').disabled=true;box.querySelectorAll('[data-stop]').forEach(b=>b.setAttribute('aria-current','false'))};
+function motion(){ $('motionToggle').textContent=paused?'繼續散步 ▶':'暫停散步 Ⅱ';$('motionToggle').setAttribute('aria-pressed',String(paused));map.classList.toggle('paused',paused)}motion();$('motionToggle').onclick=()=>{paused=!paused;motion()};
+expOpen.textContent='下一站 →';expOpen.onclick=()=>go((tour+1)%5);expGuide.textContent='本站課程';expGuide.onclick=()=>tour>0?renderYear(tour-1):renderDirector();
+startExploreBtn.onclick=()=>{stage.scrollIntoView({behavior:reduce.matches?'auto':'smooth',block:'start'});go(0)};
+// Capture student selection before the older static detail handler.
+students.forEach((s,i)=>s.el.addEventListener('click',e=>{e.stopImmediatePropagation();go(i+1)},true));director.addEventListener('click',e=>{e.stopImmediatePropagation();go(0)},true);
+function frame(t){const dt=Math.min((t-last)/1000,.06);last=t;const blocked=paused||document.hidden||overlay.classList.contains('open');for(let i=0;i<students.length;i++){const s=students[i];let moving=!blocked&&!s.hover,dir=1;const guide=tour===i+1;if(guide){moving=!blocked&&!arrived;if(moving){let delta=(target-s.d+length)%length;if(delta>length/2)delta-=length;dir=Math.sign(delta)||1;const step=90*dt;if(Math.abs(delta)<=step){s.d=target;finish();moving=false}else s.d=(s.d+dir*step+length)%length}}else if(moving){if(s.rest>0){s.rest-=dt;moving=false}else{s.d=(s.d+dt*s.speed)%length;s.untilRest-=dt;if(s.untilRest<=0){s.rest=2+i*.5;s.untilRest=8+i*2}}}const p=path.getPointAtLength(s.d),next=path.getPointAtLength((s.d+dir*2+length)%length);s.el.style.setProperty('--x',p.x/10+'%');s.el.style.setProperty('--y',p.y/6+'%');s.el.classList.toggle('is-walking',moving);s.el.style.zIndex=String(10+Math.round(p.y));s.el.querySelector('.character').style.transform='scale(.57) scaleX('+(next.x<p.x?-1:1)+')'}if(auto&&arrived&&!blocked&&tour>=0){elapsed+=dt;if(elapsed>14){if(tour<4)go(tour+1);else{auto=false;$('tourAuto').textContent='自動導覽：關';$('tourAuto').setAttribute('aria-pressed','false');$('tourStatus').textContent='五站導覽完成！繼續探索六大領域，或查看課程詳情。'}}}requestAnimationFrame(frame)}requestAnimationFrame(frame);moveWalkerToElement=()=>{};
+})();
+</script></body></html>
